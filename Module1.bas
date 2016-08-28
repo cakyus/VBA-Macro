@@ -13,13 +13,15 @@ Sub Generate_SqlWhereIn_FromSelection()
     celCount = 1
     For Each cel In selectedRange.Cells
         If celCount = 1 Then
-            sqlWhereIn = "'" & cel.Value & "'"
+            sqlWhereIn = " IN ('" & cel.Value & "'"
         Else
             sqlWhereIn = sqlWhereIn & ",'" & cel.Value & "'"
         End If
         celCount = celCount + 1
     Next cel
+    sqlWhereIn = sqlWhereIn & ")"
     
-    Debug.Print sqlWhereIn
-
+    Sheets.Add
+    Excel.ActiveSheet.Name = "SqlWhereIn_" & Sheets.Count
+    Excel.ActiveCell.Value = sqlWhereIn
 End Sub
